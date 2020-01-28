@@ -10,6 +10,17 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+extends:
+  template: start.yml
+  parameters:
+    buildSteps:  
+      - bash: echo Test #Passes
+        displayName: Test - Will Pass
+      - bash: echo "Test"
+        displayName: Test 2 - Will Pass
+      - script: echo "Script Test" # Comment out to successfully pass
+        displayName: Test 3 - Will Fail
+
 steps:
 - task: Maven@3
   inputs:
